@@ -66,6 +66,7 @@
             top: 0;
             left: 0;
         }
+        /* Efter-bilden är den som klipps och ligger överst */
         .slider-before {
             clip-path: inset(0 0 0 50%);
             -webkit-clip-path: inset(0 0 0 50%);
@@ -241,9 +242,9 @@
                 </div>
                 <div class="flex justify-center reveal">
                     <div class="slider-container">
-                        <!-- EFTER BILD-PLATSHÅLLARE -->
+                        <!-- EFTER BILD: Denna bild ligger överst och klipps. Byt ut "efter.jpg" mot din färdiga bild. -->
                         <img src="images/efter.jpg" alt="Efter renovering" class="slider-before">
-                        <!-- FÖRE BILD-PLATSHÅLLARE -->
+                        <!-- FÖRE BILD: Denna bild ligger underst. Byt ut "fore.jpg" mot din ursprungliga bild. -->
                         <img src="images/fore.jpg" alt="Före renovering" class="slider-after">
                         <div class="slider-handle">
                             <span class="slider-handle-icon">&#x2194;</span>
@@ -328,13 +329,6 @@
                                     </div>
                                 </li>
                                 <li class="flex items-center gap-3">
-                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.047 11.047 0 004.898 4.898l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.147 18 3 13.853 3 8V6a1 1 0 011-1h2zm1-2a2 2 0 00-2 2v2a1 1 0 001 1h.74a1 1 0 00.98-.81l.66-3.96a1 1 0 00-.91-.76zM15 1a1 1 0 011 1v2a1 1 0 001 1h.74a1 1 0 00.98-.81l.66-3.96a1 1 0 00-.91-.76z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                                    <div>
-                                        <p class="font-bold">Tel:</p>
-                                        <a href="tel:0155401000" class="text-slate-300 hover:underline">0155 – 40 10 00</a>
-                                    </div>
-                                </li>
-                                <li class="flex items-center gap-3">
                                     <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                                     <div>
                                         <p class="font-bold">E-post:</p>
@@ -394,7 +388,7 @@
         <div class="container mx-auto px-6 py-16 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <div class="flex items-center mb-6 md:mb-0">
                 <!-- LOGGA-PLATSHÅLLARE -->
-                <img src="images/logo-footer-placeholder.png" alt="MR Gruppen Logotyp" class="h-10 w-auto mr-4">
+                <img src="images/mrgruppen-logo.png" alt="MR Gruppen Logotyp" class="h-10 w-auto mr-4">
                 <p class="text-slate-400 text-sm">© 2025 MR Gruppen Entreprenad AB. Alla rättigheter reserverade.</p>
             </div>
             <!-- CERTIFIERINGS-PLATSHÅLLARE -->
