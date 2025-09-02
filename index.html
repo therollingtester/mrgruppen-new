@@ -56,18 +56,17 @@
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             cursor: ew-resize;
             user-select: none;
+            display: grid;
         }
         .slider-container img {
             display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
+            grid-area: 1/1; /* Låter bilderna staplas ovanpå varandra */
         }
         /* Efter-bilden är den som klipps och ligger överst */
-        .slider-before {
+        .slider-after {
             clip-path: inset(0 0 0 50%);
             -webkit-clip-path: inset(0 0 0 50%);
         }
@@ -86,6 +85,7 @@
             transform: translate(-50%, -50%);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             cursor: ew-resize;
+            z-index: 20; /* Säkerställer att reglaget ligger över bilderna */
         }
         .slider-handle::before, .slider-handle::after {
             content: '';
@@ -243,9 +243,9 @@
                 <div class="flex justify-center reveal">
                     <div class="slider-container">
                         <!-- FÖRE-BILD: Denna bild ligger underst. -->
-                        <img src="images/fore.jpg" alt="Före renovering" class="absolute">
+                        <img src="images/fore.jpg" alt="Före renovering">
                         <!-- EFTER-BILD: Denna bild ligger överst och klipps när du drar i reglaget. -->
-                        <img src="images/efter.jpg" alt="Efter renovering" class="slider-before">
+                        <img src="images/efter.jpg" alt="Efter renovering" class="slider-after">
                         <div class="slider-handle">
                             <span class="slider-handle-icon">&#x2194;</span>
                         </div>
@@ -439,8 +439,22 @@
         // Före & Efter slider JavaScript
         const sliderContainer = document.querySelector('.slider-container');
         const sliderHandle = document.querySelector('.slider-handle');
-        const sliderBefore = document.querySelector('.slider-before');
+        const sliderAfter = document.querySelector('.slider-after');
+        
         let isDragging = false;
+        
+        // Uppdatera slidern på både mus- och touch-händelser
+        function updateSlider(x) {
+            const containerRect = sliderContainer.getBoundingClientRect();
+            let newPosition = (x - containerRect.left) / containerRect.width;
+
+            if (newPosition < 0) newPosition = 0;
+            if (newPosition > 1) newPosition = 1;
+
+            // `clip-path` appliceras på efter-bilden
+            sliderAfter.style.clipPath = `inset(0 0 0 ${newPosition * 100}%)`;
+            sliderHandle.style.left = `${newPosition * 100}%`;
+        }
 
         sliderContainer.addEventListener('mousedown', (e) => {
             isDragging = true;
@@ -470,17 +484,6 @@
             if (!isDragging) return;
             updateSlider(e.touches[0].clientX);
         });
-
-        function updateSlider(x) {
-            const containerRect = sliderContainer.getBoundingClientRect();
-            let newPosition = (x - containerRect.left) / containerRect.width;
-
-            if (newPosition < 0) newPosition = 0;
-            if (newPosition > 1) newPosition = 1;
-
-            sliderBefore.style.clipPath = `inset(0 0 0 ${newPosition * 100}%)`;
-            sliderHandle.style.left = `${newPosition * 100}%`;
-        }
     </script>
 </body>
 </html>
