@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MR Gruppen Entreprenad AB - Bygg & Entreprenad i Sörmland</title>
+
+    <!-- Favicon och Open Graph för förhandsvisning -->
+    <link rel="icon" href="images/mrgruppen-logo.png" type="image/png">
+    <meta property="og:title" content="MR Gruppen Entreprenad AB - Bygg & Entreprenad i Sörmland">
+    <meta property="og:description" content="Er pålitliga partner inom trädfällning, sugbilar, målning, snickeri och avloppsrensning.">
+    <meta property="og:image" content="images/mrgruppen-logo.png">
     
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -541,8 +547,13 @@
         }
         
         // Triggning av animationer vid sidladdning
-        window.addEventListener("scroll", reveal);
         document.addEventListener("DOMContentLoaded", function() {
+            // Skrolla till toppen av sidan
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
             var elementsToReveal = document.querySelectorAll('.hero-bg .reveal');
             elementsToReveal.forEach(function(el) {
                 el.classList.add('active');
