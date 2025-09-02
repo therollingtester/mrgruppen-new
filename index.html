@@ -542,7 +542,8 @@
 
         window.addEventListener("scroll", reveal);
         // Trigga vid laddning
-        reveal();
+        window.addEventListener("load", reveal);
+        
 
         // Före & Efter slider JavaScript
         const sliderContainer = document.querySelector('.slider-container');
