@@ -555,7 +555,8 @@
             });
 
             var elementsToReveal = document.querySelectorAll('.hero-bg .reveal');
-            elementsToReveal.forEach(function(el) {
+            elementsToReveal.forEach(function(el, index) {
+                el.style.transitionDelay = `${index * 200}ms`;
                 el.classList.add('active');
             });
             // Initial call to reveal other elements on the page that are already in view
