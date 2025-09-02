@@ -531,37 +531,32 @@
         // Skroll-animationer
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
+            var heroElements = document.querySelectorAll('.hero-bg .reveal');
+            
+            // Hantera hero-sektionen separat för direkt inläsning
+            heroElements.forEach(function(el, index) {
+                el.style.transitionDelay = `${index * 200}ms`;
+                el.classList.add('active');
+            });
 
+            // Hantera resten av sektionerna vid skroll
             for (var i = 0; i < reveals.length; i++) {
+                // Hoppa över hero-elementen då de redan har laddats in
+                if (reveals[i].closest('.hero-bg')) continue;
+
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 150;
 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
-                } else {
-                    // Valfritt: Ta bort active-klassen för att trigga om animeringen
-                    // reveals[i].classList.remove("active"); 
                 }
             }
         }
         
         // Triggning av animationer vid sidladdning
-        document.addEventListener("DOMContentLoaded", function() {
-            // Skrolla till toppen av sidan
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-
-            var elementsToReveal = document.querySelectorAll('.hero-bg .reveal');
-            elementsToReveal.forEach(function(el, index) {
-                el.style.transitionDelay = `${index * 200}ms`;
-                el.classList.add('active');
-            });
-            // Initial call to reveal other elements on the page that are already in view
-            reveal(); 
-        });
+        document.addEventListener("DOMContentLoaded", reveal);
+        window.addEventListener("scroll", reveal);
         
 
         // Före & Efter slider JavaScript
