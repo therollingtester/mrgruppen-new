@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="sv" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR Gruppen Entreprenad AB - Bygg & Entreprenad i Sörmland</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        /* Egen CSS för bakgrundsbilden */
+        .hero-bg {
+            background-image: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.7)), url('https://images.unsplash.com/photo-1542382902-184589d8924b?q=80&w=1740&auto=format&fit=crop');
+            background-position: center;
+            background-size: cover;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: #4B5563; /* mörkare grå */
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .reveal {
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 1s all ease;
+        }
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        /* Före & Efter Slider CSS */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            cursor: ew-resize;
+            user-select: none;
+        }
+        .slider-container img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .slider-before {
+            clip-path: inset(0 0 0 50%);
+            -webkit-clip-path: inset(0 0 0 50%);
+        }
+        .slider-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            border: 2px solid #4B5563; /* mörkare grå */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: ew-resize;
+        }
+        .slider-handle::before, .slider-handle::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100vh;
+            background-color: #4B5563; /* mörkare grå */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .slider-handle-icon {
+            color: #4B5563; /* mörkare grå */
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-md transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- LOGGA-PLATSHÅLLARE -->
+            <a href="#" class="flex items-center space-x-2">
+                <img src="images/logo-placeholder.png" alt="MR Gruppen Logotyp" class="h-10 w-auto">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#tjanster" class="text-slate-600 hover:text-slate-900 font-semibold transition-colors duration-300">Tjänster</a>
+                <a href="#om-oss" class="text-slate-600 hover:text-slate-900 font-semibold transition-colors duration-300">Om Oss</a>
+            </div>
+            <a href="#kontakt" class="hidden md:inline-block bg-emerald-800 text-white font-bold py-2 px-5 rounded-full hover:bg-emerald-900 transition-transform duration-300 hover:scale-105 shadow-sm">
+                Fråga om offert
+            </a>
+            <!-- Mobilmeny-knapp -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-slate-800">
+                ☰
+            </button>
+        </nav>
+        <!-- Mobilmeny -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#tjanster" class="block text-slate-600 hover:text-slate-900 font-semibold py-2">Tjänster</a>
+            <a href="#om-oss" class="block text-slate-600 hover:text-slate-900 font-semibold py-2">Om Oss</a>
+            <a href="#kontakt" class="block bg-emerald-800 text-white text-center font-bold mt-2 py-2 px-5 rounded-full hover:bg-emerald-900 transition-transform duration-300 hover:scale-105 shadow-sm">
+                Fråga om offert
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero-bg bg-cover bg-center text-white">
+            <div class="container mx-auto px-6 py-32 md:py-48 text-center">
+                <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4 text-shadow-lg reveal">MR GRUPPEN ENTREPRENAD AB</h1>
+                <h2 class="text-xl md:text-2xl font-bold tracking-wide text-gray-300 mb-6 reveal" style="transition-delay: 200ms;">Er pålitliga partner inom entreprenadbehov.</h2>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl mb-8 font-light text-slate-200 reveal" style="transition-delay: 400ms;">
+                    Med fokus på kvalitet och service är vi redo att möta era entreprenadbehov.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 reveal" style="transition-delay: 600ms;">
+                    <a href="#kontakt" class="bg-emerald-800 text-white font-bold text-lg py-4 px-10 rounded-full hover:bg-emerald-900 transition-transform duration-300 hover:scale-105 shadow-lg">
+                        KONTAKTA OSS
+                    </a>
+                    <a href="#tjanster" class="bg-white/10 border border-white text-white font-bold text-lg py-4 px-10 rounded-full hover:bg-white/20 transition-transform duration-300 hover:scale-105 shadow-lg">
+                        VÅRA TJÄNSTER
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tjänster Section -->
+        <section id="tjanster" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 section-title">Våra Tjänster</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        MR Gruppen erbjuder ett brett utbud av tjänster för att möta olika behov inom trädfällning, klottersanering, målning, snickeri och avloppsrensning. Vi kombinerar hög säkerhet och rätt behörighet med användning av modern utrustning och material av bästa kvalitet. Våra tjänster utförs med precision, hållbarhet och miljöhänsyn, vilket garanterar både kostnadseffektivitet och högsta kvalitet i vårt arbete.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                    <!-- Trädfällning -->
+                    <div class="reveal bg-white rounded-lg shadow-xl p-8 border-t-8 border-emerald-800">
+                        <!-- BILD-PLATSHÅLLARE -->
+                        <img src="images/trädfällning.jpg" alt="Bild på trädfällning" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Trädfällning</h3>
+                        <p class="text-slate-600">MR Gruppen erbjuder tjänster för trädfällning och bortforsling av stammar. Vi håller hög säkerhet och har rätt behörighet. MR Gruppen använder sig av modern utrustning som ger minimala skador på skog och mark.</p>
+                    </div>
+                    <!-- Klottersanering -->
+                    <div class="reveal bg-white rounded-lg shadow-xl p-8 border-t-8 border-gray-400" style="transition-delay: 100ms;">
+                        <!-- BILD-PLATSHÅLLARE -->
+                        <img src="images/klottersanering.jpg" alt="Bild på klottersanering" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Klottersanering</h3>
+                        <p class="text-slate-600">Vi hanterar all typ av klottersanering, från borttagning av graffiti till rengöring och klotterskydd av offentliga och industriella ytor, med noggrannhet och hänsyn till miljön. Våra klotterskydd levereras med en 10-årig garanti för att säkerställa långvarigt skydd och kvalitet.”</p>
+                    </div>
+                    <!-- Målning -->
+                    <div class="reveal bg-white rounded-lg shadow-xl p-8 border-t-8 border-emerald-800" style="transition-delay: 200ms;">
+                        <!-- BILD-PLATSHÅLLARE -->
+                        <img src="images/målning.jpg" alt="Bild på målning" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Målning</h3>
+                        <p class="text-slate-600">Vi har specialkompetens inom måleriyrket och hanterar alla typer av måleriuppdrag. Genom vår miljö- och kvalitetspolicy kan våra kunder vara trygga med att vi använder de bästa materialen och teknikerna, vilket garanterar både hållbarhet och högsta kvalitet i vårt arbete.</p>
+                    </div>
+                    <!-- Snickeri -->
+                    <div class="reveal bg-white rounded-lg shadow-xl p-8 border-t-8 border-emerald-800" style="transition-delay: 300ms;">
+                        <!-- BILD-PLATSHÅLLARE -->
+                        <img src="images/snickeri.jpg" alt="Bild på snickeri" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Snickeri</h3>
+                        <p class="text-slate-600">Mr Gruppen har omfattande expertis inom snickeriyrket och hanterar alla typer av snickeriprojekt. Genom att erbjuda bra priser och hög kvalitet kan våra kunder vara säkra på att vi använder de bästa materialen och teknikerna, vilket garanterar både hållbarhet och högsta kvalitet i vårt arbete.</p>
+                    </div>
+                    <!-- Avloppsrensning -->
+                    <div class="reveal bg-white rounded-lg shadow-xl p-8 border-t-8 border-gray-400" style="transition-delay: 400ms;">
+                        <!-- BILD-PLATSHÅLLARE -->
+                        <img src="images/avloppsrensning.jpg" alt="Bild på avloppsrensning" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Avloppsrensning</h3>
+                        <p class="text-slate-600">Vi utför avlopppsränsning med högrycksspolning med noggrannhet och effektivitet, vilket säkerställer rena och fungerande avloppssystem utan blockeringar eller hinder</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Före & Efter Slider -->
+        <section id="fore-efter" class="py-20 md:py-32 bg-slate-100">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 section-title">Våra projekt i bilder</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        Dra i reglaget för att se den fantastiska förvandlingen!
+                    </p>
+                </div>
+                <div class="flex justify-center reveal">
+                    <div class="slider-container">
+                        <!-- EFTER BILD-PLATSHÅLLARE -->
+                        <img src="images/efter-placeholder.jpg" alt="Efter renovering" class="slider-before">
+                        <!-- FÖRE BILD-PLATSHÅLLARE -->
+                        <img src="images/före-placeholder.jpg" alt="Före renovering" class="slider-after">
+                        <div class="slider-handle">
+                            <span class="slider-handle-icon">&#x2194;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Reviews Snapshot -->
+        <section id="google-reviews" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 section-title after:bg-emerald-800">Våra kunder älskar oss</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-16">
+                        Vi är otroligt stolta över att ha ett 5-stjärnigt betyg från våra nöjda kunder.
+                    </p>
+                </div>
+                <div class="reveal flex justify-center">
+                    <div class="bg-white rounded-lg p-8 shadow-xl border-t-8 border-emerald-800 w-full max-w-sm flex flex-col items-center text-center">
+                        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo" class="w-28 mb-4">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-4xl font-black text-slate-900">5.0</span>
+                            <div class="text-3xl text-gray-400">
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6">Baserat på omdömen på Google</p>
+                        <a href="#" class="bg-emerald-800 text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-900 transition-transform duration-300 hover:scale-105 shadow-md">
+                            Läs alla omdömen
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontakt Section -->
+        <section id="kontakt" class="py-20 md:py-32 bg-emerald-950 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-white mb-12 section-title after:bg-gray-400">KONTAKTA OSS</h2>
+                    <div class="flex flex-col lg:flex-row justify-center gap-12 mt-16 text-left">
+                        <!-- Kontaktinfo -->
+                        <div class="w-full lg:w-1/3 reveal" style="transition-delay: 100ms;">
+                            <p class="text-xl text-slate-300 font-semibold mb-6">FÖR EN SNABB KONTAKT</p>
+                            <ul class="space-y-4 text-lg">
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.047 11.047 0 004.898 4.898l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.147 18 3 13.853 3 8V6a1 1 0 011-1h2zm1-2a2 2 0 00-2 2v2a1 1 0 001 1h.74a1 1 0 00.98-.81l.66-3.96a1 1 0 00-.91-.76zM15 1a1 1 0 011 1v2a1 1 0 001 1h.74a1 1 0 00.98-.81l.66-3.96a1 1 0 00-.91-.76z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                    <div>
+                                        <p class="font-bold">Mob:</p>
+                                        <a href="tel:0733938000" class="text-slate-300 hover:underline">073 – 393 8000</a>
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.047 11.047 0 004.898 4.898l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.147 18 3 13.853 3 8V6a1 1 0 011-1h2zm1-2a2 2 0 00-2 2v2a1 1 0 001 1h.74a1 1 0 00.98-.81l.66-3.96a1 1 0 00-.91-.76zM15 1a1 1 0 011 1v2a1 1 0 001 1h.74a1 1 0 00.98-.81l.66-3.96a1 1 0 00-.91-.76z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                                    <div>
+                                        <p class="font-bold">Tel:</p>
+                                        <a href="tel:0155401000" class="text-slate-300 hover:underline">0155 – 40 10 00</a>
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                    <div>
+                                        <p class="font-bold">E-post:</p>
+                                        <a href="mailto:info@mrgruppen.se" class="text-slate-300 hover:underline">info@mrgruppen.se</a>
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                                    <div>
+                                        <p class="font-bold">Adress:</p>
+                                        <p class="text-slate-300">Tystberga</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Kontaktformulär -->
+                        <div class="w-full lg:w-2/3 reveal" style="transition-delay: 200ms;">
+                            <form action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST" class="bg-slate-700 p-8 md:p-12 rounded-lg shadow-2xl">
+                                <h3 class="text-2xl font-bold text-white mb-6">Skicka ett meddelande</h3>
+                                <div class="space-y-6">
+                                    <input type="text" name="Namn" placeholder="Namn *" required class="w-full p-4 bg-slate-600 rounded-md placeholder-slate-400 text-white border-none focus:outline-none focus:ring-2 focus:ring-gray-400">
+                                    <input type="email" name="Email" placeholder="Email *" required class="w-full p-4 bg-slate-600 rounded-md placeholder-slate-400 text-white border-none focus:outline-none focus:ring-2 focus:ring-gray-400">
+                                    <textarea name="Meddelande" placeholder="Meddelande *" rows="6" required class="w-full p-4 bg-slate-600 rounded-md placeholder-slate-400 text-white border-none focus:outline-none focus:ring-2 focus:ring-gray-400"></textarea>
+                                    <button type="submit" class="w-full bg-emerald-800 text-white font-bold text-lg py-4 px-10 rounded-full hover:bg-emerald-900 transition-transform duration-300 hover:scale-105 shadow-md">
+                                        Skicka
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Om Oss Section -->
+        <section id="om-oss" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <!-- BILD-PLATSHÅLLARE -->
+                    <img src="images/om-oss.jpg" alt="MR Gruppen team" class="rounded-lg shadow-xl w-full max-w-lg mx-auto mb-12">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 section-title">Om Oss</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed mb-8">
+                        Med målet att erbjuda de bästa lösningarna, mest kostnadseffektiva lösningarna för dig.
+                    </p>
+                    <p class="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed font-semibold">
+                        2023 grundades MR Gruppen av Mirko Radakovic med en vision om att bli en ledande aktör inom Sörmland och Stockholmsregionerna. Genom att erbjuda innovativa, hållbara och kundanpassade tjänster strävar MR Gruppen efter att skapa en verksamhet som inte bara uppfyller, utan överträffar kundernas förväntningar. Med fokus på oöverträffad kvalitet, professionalism och miljömedvetenhet strävar MR Gruppen efter att bli en pålitlig och respekterad partner i branschen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-white">
+        <div class="container mx-auto px-6 py-16 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="flex items-center mb-6 md:mb-0">
+                <!-- LOGGA-PLATSHÅLLARE -->
+                <img src="images/logo-footer-placeholder.png" alt="MR Gruppen Logotyp" class="h-10 w-auto mr-4">
+                <p class="text-slate-400 text-sm">© 2025 MR Gruppen Entreprenad AB. Alla rättigheter reserverade.</p>
+            </div>
+            <!-- CERTIFIERINGS-PLATSHÅLLARE -->
+            <div>
+                <img src="images/certifiering-badge.png" alt="Certifieringsmärke" class="h-12 w-auto">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobilmeny-toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Dölj mobilmeny vid klick på länk
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Skroll-animationer
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    // Valfritt: Ta bort active-klassen för att trigga om animeringen
+                    // reveals[i].classList.remove("active"); 
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Trigga vid laddning
+        reveal();
+
+        // Före & Efter slider JavaScript
+        const sliderContainer = document.querySelector('.slider-container');
+        const sliderHandle = document.querySelector('.slider-handle');
+        const sliderBefore = document.querySelector('.slider-before');
+        let isDragging = false;
+
+        sliderContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateSlider(e.clientX);
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            updateSlider(e.clientX);
+        });
+
+        // Touch events for mobile
+        sliderContainer.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        function updateSlider(x) {
+            const containerRect = sliderContainer.getBoundingClientRect();
+            let newPosition = (x - containerRect.left) / containerRect.width;
+
+            if (newPosition < 0) newPosition = 0;
+            if (newPosition > 1) newPosition = 1;
+
+            sliderBefore.style.clipPath = `inset(0 0 0 ${newPosition * 100}%)`;
+            sliderHandle.style.left = `${newPosition * 100}%`;
+        }
+    </script>
+</body>
+</html>
