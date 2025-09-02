@@ -103,6 +103,19 @@
             position: relative;
             z-index: 10;
         }
+
+        /* Ny CSS för att dölja svar */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Tillräckligt stort värde */
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -263,8 +276,9 @@
                         Vi är otroligt stolta över att ha ett 5-stjärnigt betyg från våra nöjda kunder.
                     </p>
                 </div>
-                <div class="reveal flex justify-center">
-                    <div class="bg-white rounded-lg p-8 shadow-xl border-t-8 border-emerald-800 w-full max-w-sm flex flex-col items-center text-center">
+                <div class="flex flex-col md:flex-row justify-center gap-8 reveal">
+                    <!-- Statisk Google Review-ruta -->
+                    <div class="bg-white rounded-lg p-8 shadow-xl border-t-8 border-emerald-800 w-full max-w-sm flex flex-col items-center text-center mb-8 md:mb-0">
                         <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo" class="w-28 mb-4">
                         <div class="flex items-center gap-2 mb-4">
                             <span class="text-4xl font-black text-slate-900">5.0</span>
@@ -280,6 +294,46 @@
                         <a href="https://g.page/r/CdtBxV3s1YWxEAE/review" target="_blank" class="bg-emerald-800 text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-900 transition-transform duration-300 hover:scale-105 shadow-md">
                             Läs alla omdömen
                         </a>
+                    </div>
+                    
+                    <!-- Dynamiska kundcitat -->
+                    <div class="flex flex-col gap-4 w-full max-w-sm">
+                        <!-- Kundcitat 1 (Pontus S) -->
+                        <div class="bg-slate-100 rounded-lg p-6 text-left shadow-md">
+                            <p class="text-slate-600 italic mb-4">"Trevlig service och bra kunde bemötande."</p>
+                            <p class="font-bold text-slate-900">- Pontus S.</p>
+                            <div class="text-yellow-400 mt-2">
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                            </div>
+                        </div>
+                        <!-- Kundcitat 2 (Johanna J) - Markeras med grön ram -->
+                        <div class="bg-slate-100 rounded-lg p-6 text-left shadow-md border-t-8 border-emerald-800" style="transition-delay: 100ms;">
+                            <p class="text-slate-600 italic mb-4">"Rekommenderar varmt Mr Gruppen! Snabb återkoppling och god service när vi i somras behövde hjälp med målning av husfasad samt trädfällning. Nu i vinter har vi fått hjälp med snöröjning och är lika nöjda även där. Stor eloge till Mirko på Mr Gruppen!"</p>
+                            <p class="font-bold text-slate-900">- Johanna J.</p>
+                            <div class="text-yellow-400 mt-2">
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                            </div>
+                        </div>
+                        <!-- Kundcitat 3 (Claes D) -->
+                        <div class="bg-slate-100 rounded-lg p-6 text-left shadow-md" style="transition-delay: 200ms;">
+                            <p class="text-slate-600 italic mb-4">"Tack för snabb och proffsig hjälp."</p>
+                            <p class="font-bold text-slate-900">- Claes D.</p>
+                            <div class="text-yellow-400 mt-2">
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                                <span class="align-top">&#9733;</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -306,6 +360,29 @@
                                 Skicka ansökan
                             </button>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="relative text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 section-title after:bg-emerald-800">Vanliga frågor</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left reveal">
+                    <div class="p-6 bg-slate-100 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Kan vi använda ROT-avdrag?</h3>
+                        <p class="text-slate-600">Ja, absolut! Vi hanterar ROT-avdraget direkt åt dig, så att du kan fokusera på ditt projekt. Avdraget specificeras tydligt på din faktura.</p>
+                    </div>
+                    <div class="p-6 bg-slate-100 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Har ni någon garanti på era arbeten?</h3>
+                        <p class="text-slate-600">Självklart. Vi erbjuder en omfattande nöjdhetsgaranti och garanti på alla våra tjänster för att du ska känna dig trygg med att du får ett professionellt och hållbart resultat. Vårt mål är 100% nöjda kunder.</p>
+                    </div>
+                    <div class="p-6 bg-slate-100 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Hur får jag min faktura?</h3>
+                        <p class="text-slate-600">Vi skickar fakturor bekvämt via e-post för att minska pappersspill och förenkla din administration. Allt för en smidig och modern process.</p>
                     </div>
                 </div>
             </div>
